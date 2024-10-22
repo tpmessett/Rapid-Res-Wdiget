@@ -20,6 +20,13 @@
     color: #979CB2;
 }
 
+#rapid-logo {
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  justify-content: center
+}
+
 #reservationForm input[type="date"],
 #reservationForm input[type="time"],
 #reservationForm input[type="number"] {

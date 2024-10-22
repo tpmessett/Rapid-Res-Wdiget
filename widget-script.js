@@ -3,6 +3,7 @@ function createForm(restaurantPaths, title) {
 
     const formTitle = document.createElement("h2");
     formTitle.innerText = title;
+    formDiv.appendChild(formTitle);
 
     // If more than one restaurant, create the dropdown, else hide it and use the only restaurant
     let selectedRestaurantUrl;
