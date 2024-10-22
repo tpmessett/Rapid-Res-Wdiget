@@ -20,7 +20,7 @@ function createForm(restaurantPath, title) {
     const formattedDate = tomorrow.toISOString().split('T')[0]; // Format as YYYY-MM-DD
     dateInput.min = formattedDate;
 
-    // Time Input
+    // Time Input with minute restriction
     const timeLabel = document.createElement("label");
     timeLabel.setAttribute("for", "time");
     timeLabel.innerText = "Select Time:";
@@ -28,6 +28,19 @@ function createForm(restaurantPath, title) {
     timeInput.type = "time";
     timeInput.id = "time";
     timeInput.required = true;
+
+    timeInput.addEventListener('change', function () {
+        let timeValue = timeInput.value;
+        if (timeValue) {
+            let [hours, minutes] = timeValue.split(':');
+            minutes = Math.round(minutes / 15) * 15;
+            if (minutes === 60) {
+                minutes = 0;
+                hours = (parseInt(hours) + 1).toString().padStart(2, '0');
+            }
+            timeInput.value = `${hours}:${minutes.toString().padStart(2, '0')}`;
+        }
+    });
 
     // Guests Input
     const guestsLabel = document.createElement("label");
