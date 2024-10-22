@@ -1,4 +1,4 @@
-function createForm(restaurantPath, title, environment) {
+function createForm(restaurantPath, title) {
     const formDiv = document.getElementById("reservationForm");
 
     const formTitle = document.createElement("h2");
@@ -44,7 +44,7 @@ function createForm(restaurantPath, title, environment) {
     const submitButton = document.createElement("button");
     submitButton.innerText = "Continue";
     submitButton.onclick = function () {
-        constructUrlAndRedirect(restaurantPath, environment);
+        constructUrlAndRedirect(restaurantPath);
     };
 
     // Append elements to the form div
@@ -58,15 +58,8 @@ function createForm(restaurantPath, title, environment) {
     formDiv.appendChild(submitButton);
 }
 
-function constructUrlAndRedirect(restaurantPath, environment) {
-    let baseUrl;
-
-    if (environment.toLowerCase() === 'live') {
-        baseUrl = `https://rapid-res.com/restaurant/${restaurantPath}`;
-    } else {
-        baseUrl = `https://dev-organiser.rapid-res.dev/restaurant/${restaurantPath}`;
-    }
-
+function constructUrlAndRedirect(restaurantPath) {
+    const baseUrl = restaurantPath;
     const date = document.getElementById("date").value;
     const time = document.getElementById("time").value;
     const guests = document.getElementById("guests").value;

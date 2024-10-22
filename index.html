@@ -10,13 +10,12 @@
     <div id="reservationForm"></div>
     <script src="https://cdn.jsdelivr.net/gh/tpmessett/Rapid-Res-Widget@main/widget-script.js"></script>
     <script>
-        // insert the part of the link after the first / here:
-        const restaurantPath = "[insert path here]";
+        // insert restaurant url here, exclude any thing after the restaurant name:
+        const restaurantPath = "[insert restaurant url here, exclude any thing after the restaurant name]";
         // title you want on the widget:
         const title = "Make a Reservation";
-        const environment = "live"
         window.onload = function() {
-            createForm(restaurantPath, title, environment);
+            createForm(restaurantPath, title);
         };
     </script>
 </body>
