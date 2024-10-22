@@ -11,12 +11,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tpmessett/Rapid-Res-Widget@latest/widget-styles.css">
     <script src="https://cdn.jsdelivr.net/gh/tpmessett/Rapid-Res-Widget@latest/widget-script.js"></script>
     <script>
-        // insert restaurant url here, exclude any thing after the restaurant name:
-        const restaurantPath = "[insert url for Rapid Res Restaurant]";
-        // title you want on the widget:
+        // Array of restaurant objects
+        const restaurantPaths = [
+            { restaurantName: "Brasserie Blanc Threadneedle Street", url: "https://dev-organiser.rapid-res.dev/restaurant/BRASSERIE-BLANC-THREADNEEDLE-STREET" },
+            // Add more restaurants as needed by copying the above and changing the name and URLs
+        ];
+
+        // Title for the widget
         const title = "Make a Reservation";
+
+        // Example usage: select the first restaurant's URL
         window.onload = function() {
-            createForm(restaurantPath, title);
+            createForm(restaurantPaths, title); // You can dynamically choose the restaurant
         };
     </script>
 </body>

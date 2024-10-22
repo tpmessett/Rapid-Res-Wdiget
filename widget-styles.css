@@ -23,7 +23,17 @@
 #reservationForm input[type="date"],
 #reservationForm input[type="time"],
 #reservationForm input[type="number"] {
-    width: calc(100% - 20px);
+  width: calc(100% - 20px)
+}
+
+#reservationForm select {
+  width: 100%;
+}
+
+#reservationForm input[type="date"],
+#reservationForm input[type="time"],
+#reservationForm input[type="number"],
+#reservationForm select {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #979CB2;

@@ -1,8 +1,41 @@
-function createForm(restaurantPath, title) {
+function createForm(restaurantPaths, title) {
     const formDiv = document.getElementById("reservationForm");
 
     const formTitle = document.createElement("h2");
     formTitle.innerText = title;
+
+    // If more than one restaurant, create the dropdown, else hide it and use the only restaurant
+    let selectedRestaurantUrl;
+    if (restaurantPaths.length > 1) {
+        // Dropdown for selecting the restaurant
+        const restaurantLabel = document.createElement("label");
+        restaurantLabel.setAttribute("for", "restaurant");
+        restaurantLabel.innerText = "Select Restaurant:";
+        const restaurantSelect = document.createElement("select");
+        restaurantSelect.id = "restaurant";
+        restaurantSelect.required = true;
+
+        // Populate the dropdown with restaurant options
+        restaurantPaths.forEach(restaurant => {
+            const option = document.createElement("option");
+            option.value = restaurant.url;
+            option.innerText = restaurant.restaurantName;
+            restaurantSelect.appendChild(option);
+        });
+
+        // Append the restaurant dropdown to the form
+        formDiv.appendChild(restaurantLabel);
+        formDiv.appendChild(restaurantSelect);
+
+        // Set selected restaurant URL based on dropdown
+        selectedRestaurantUrl = restaurantSelect.value;
+        restaurantSelect.addEventListener('change', function () {
+            selectedRestaurantUrl = restaurantSelect.value;
+        });
+    } else {
+        // If only one restaurant, use it and hide the selector
+        selectedRestaurantUrl = restaurantPaths[0].url;
+    }
 
     // Date Input
     const dateLabel = document.createElement("label");
@@ -17,7 +50,7 @@ function createForm(restaurantPath, title) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const formattedDate = tomorrow.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+    const formattedDate = tomorrow.toISOString().split('T')[0];
     dateInput.min = formattedDate;
 
     // Time Input with minute restriction
@@ -57,11 +90,10 @@ function createForm(restaurantPath, title) {
     const submitButton = document.createElement("button");
     submitButton.innerText = "Continue";
     submitButton.onclick = function () {
-        constructUrlAndRedirect(restaurantPath);
+        constructUrlAndRedirect(selectedRestaurantUrl);
     };
 
-    // Append elements to the form div
-    formDiv.appendChild(formTitle);
+    // Append remaining elements to the form div
     formDiv.appendChild(dateLabel);
     formDiv.appendChild(dateInput);
     formDiv.appendChild(timeLabel);
@@ -71,8 +103,8 @@ function createForm(restaurantPath, title) {
     formDiv.appendChild(submitButton);
 }
 
-function constructUrlAndRedirect(restaurantPath) {
-    const baseUrl = restaurantPath;
+function constructUrlAndRedirect(restaurantUrl) {
+    const baseUrl = restaurantUrl;
     const date = document.getElementById("date").value;
     const time = document.getElementById("time").value;
     const guests = document.getElementById("guests").value;
@@ -84,3 +116,7 @@ function constructUrlAndRedirect(restaurantPath) {
         alert("Please fill in all fields.");
     }
 }
+
+window.onload = function() {
+    createForm(restaurantPaths, title);
+};
