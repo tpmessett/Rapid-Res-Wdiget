@@ -111,7 +111,7 @@ function constructUrlAndRedirect(restaurantUrl) {
     const guests = document.getElementById("guests").value;
 
     if (date && time && guests) {
-        const fullUrl = `${baseUrl}?date=${encodeURIComponent(date)} ${encodeURIComponent(time)}&time=${time}&guests=${guests}`;
+        const fullUrl = `${baseUrl}?date=${encodeURIComponent(date)} ${encodeURIComponent(time)}&time=${time}&guests=${guests}&source=customerweb`;
         window.open(fullUrl, '_blank');
     } else {
         alert("Please fill in all fields.");
